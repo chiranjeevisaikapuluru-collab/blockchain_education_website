@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding Blockchain & Web3 — Interactive Educational Hub</title>
+    <meta name="description" content="A complete, interactive beginner-to-advanced guide to Blockchain, Bitcoin, Ethereum, UTXO, Smart Contracts, and Decentralized Systems.">
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Dynamic Reading Progress Bar -->
+    <div class="progress-bar-container">
+        <div class="progress-bar" id="reading-progress"></div>
+    </div>
+
+    <!-- Top Navigation Bar -->
+    <header class="top-navbar">
+        <div class="nav-logo">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="ticker-green">
+                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+            </svg>
+            <span>BLOCK<span class="gradient-text-cyan">CHAIN</span>.EDU</span>
+        </div>
+        <div class="nav-ticker" id="price-ticker">
+            <div class="ticker-item">
+                <span>BTC/USD:</span>
+                <span id="btc-price" class="ticker-green">$67,420.50</span>
+            </div>
+            <div class="ticker-item">
+                <span>ETH/USD:</span>
+                <span id="eth-price" class="ticker-green">$3,845.20</span>
+            </div>
+            <div class="ticker-item">
+                <span>Gas Price:</span>
+                <span id="gas-price" class="ticker-green">24 Gwei</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="app-container">
+        <!-- Sidebar Navigation Menu (Scrollspy) -->
+        <aside class="sidebar">
+            <h3 class="sidebar-title">Modules</h3>
+            <ul class="sidebar-nav-list" id="sidebar-menu">
+                <li class="sidebar-nav-item active"><a href="#hero-section"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>Welcome</a></li>
+                <li class="sidebar-nav-item"><a href="#section2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="9" x2="15" y2="9"></line><line x1="9" y1="13" x2="15" y2="13"></line><line x1="9" y1="17" x2="15" y2="17"></line></svg>1. What is Blockchain?</a></li>
+                <li class="sidebar-nav-item"><a href="#section3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>2. Web1 vs Web2 vs Web3</a></li>
+                <li class="sidebar-nav-item"><a href="#section4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>3. Network Systems</a></li>
+                <li class="sidebar-nav-item"><a href="#section5"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>4. Bitcoin Basics</a></li>
+                <li class="sidebar-nav-item"><a href="#section6"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>5. How Blocks Are Made</a></li>
+                <li class="sidebar-nav-item"><a href="#section7"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>6. Proof of Work (PoW)</a></li>
+                <li class="sidebar-nav-item"><a href="#section8"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="6 2 18 2 18 6 6 6"></polygon><rect x="3" y="6" width="18" height="16" rx="2"></rect></svg>7. Ethereum & EVM</a></li>
+                <li class="sidebar-nav-item"><a href="#section9"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>8. Proof of Stake (PoS)</a></li>
+                <li class="sidebar-nav-item"><a href="#section10"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>9. Types of Blockchains</a></li>
+                <li class="sidebar-nav-item"><a href="#section11"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>10. Ledger Event Logs</a></li>
+                <li class="sidebar-nav-item"><a href="#section12"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>11. UTXO Ledger Model</a></li>
+                <li class="sidebar-nav-item"><a href="#section13"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>12. Account-Based Model</a></li>
+                <li class="sidebar-nav-item"><a href="#section14"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 8a2.5 2.5 0 0 1 2 2c0 .7-.1 1.05-.5 1.5L12 14v1"></path><line x1="12" y1="19" x2="12.01" y2="19"></line></svg>13. Stablecoins Market</a></li>
+                <li class="sidebar-nav-item"><a href="#section15"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>14. Stablecoin Logs</a></li>
+                <li class="sidebar-nav-item"><a href="#section16"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>15. Course Summary</a></li>
+                <li class="sidebar-nav-item"><a href="#advanced-feature-section"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>16. Interactive Hub</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Course Content -->
+        <main class="main-content">
+
+            <!-- Hero Welcome Section -->
+            <section id="hero-section" class="hero-wrapper">
+                <canvas id="hero-canvas"></canvas>
+                
+                <!-- Floating Crypto SVGs -->
+                <div class="floating-crypto fc-btc">
+                    <svg viewBox="0 0 32 32" width="60" height="60" fill="#f7931a"><path d="M24.7 15.6c.4-2.8-1.7-4.3-4.6-5.3l.9-3.7-2.3-.6-.9 3.6c-.6-.1-1.2-.3-1.8-.4l.9-3.7-2.3-.6-.9 3.7c-.5-.1-1-.2-1.5-.3l-3.2-.8-.6 2.5s1.7.4 1.7.4c.9.2 1.3.8 1.3 1.3l-1.3 5.1c.1.1.2.1.3.2-.1-.1-.2-.1-.3-.2l-1.8 7.2c-.1.3-.4.7-1 .6 0 0-1.7-.4-1.7-.4l-1.1 2.6 3 1.1c.6.2 1.1.4 1.7.5l-.9 3.8 2.3.6.9-3.7c.6.2 1.2.3 1.8.4l-.9 3.7 2.3.6.9-3.8c4 .8 7 1.1 8.2-1.9.9-2.5.1-3.9-1.7-4.8 1.4-.3 2.4-1.2 2.7-3.1zm-4.8 6.7c-.7 3-4.5 1.4-5.8 1l-1.2 4.7c-3.6-.9-3.6-.9-3.6-.9l1.1-4.6c1 .3 2.1.5 3 .5 1.9 0 3-.5 2.6-1.9-.3-1.4-1.6-1.7-3-2.1l.6-2.5c2.4.6 3.6 1.4 3.9 3.3.4 1.8-.4 2.2-2.6 2.5zm1-7.1c-.7 2.7-3.8 1.3-4.9 1l1.1-4.3c1 .3 2.2.5 3 .5 1.8 0 2.8-.5 2.4-1.8-.4-1.3-1.5-1.6-2.9-2l.6-2.5c2 .5 3 1.3 3.3 3 .4 1.7-.2 2.6-2.6 3.1z"/></svg>
+                </div>
+                <div class="floating-crypto fc-eth">
+                    <svg viewBox="0 0 32 32" width="60" height="60" fill="#3c3c3d"><path d="M16 2L4 16.5 16 22 28 16.5 16 2z" fill="#8c8c8c"/><path d="M16 2L16 22 28 16.5z" fill="#3c3c3d"/><path d="M16 23.5L4 18 16 30 28 18z" fill="#8c8c8c"/><path d="M16 23.5L16 30 28 18z" fill="#3c3c3d"/></svg>
+                </div>
+                <div class="floating-crypto fc-usdc">
+                    <svg viewBox="0 0 32 32" width="60" height="60" fill="#2775ca"><circle cx="16" cy="16" r="14" fill="#2775ca"/><path d="M16 6a10 10 0 1 0 10 10A10 10 0 0 0 16 6zm1.3 12.8a2.5 2.5 0 0 1-2.6 2.5 2.5 2.5 0 0 1-2.5-2.5h-1.6a4.1 4.1 0 0 0 4.1 4v1.2h1.6v-1.2a4.1 4.1 0 0 0 4.1-4.1c0-2-1.3-2.9-3.2-3.4l-.8-.2c-1.6-.4-2.1-.8-2.1-1.6a1.5 1.5 0 0 1 1.5-1.5 1.5 1.5 0 0 1 1.5 1.5h1.6a3.1 3.1 0 0 0-3.1-3V8.8h-1.6v1.2a3.1 3.1 0 0 0-3.1 3c0 2 1.3 2.9 3.2 3.4l.8.2c1.6.4 2.1.8 2.1 1.6z" fill="#fff"/></svg>
+                </div>
+
+                <div class="hero-content">
+                    <span class="hero-badge">BEGINNER TO ADVANCED GUIDE</span>
+                    <h1 class="hero-title">Understanding <br><span class="gradient-text-rainbow">Blockchain & Web3</span></h1>
+                    <p class="hero-subtitle">A comprehensive, visual, and highly interactive journey through ledgers, cryptography, smart contracts, stablecoins, logs, and decentralized consensus.</p>
+                    <div class="btn-group">
+                        <a href="#section2" class="btn btn-primary">
+                            <span>Start Learning</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
+                        <a href="#advanced-feature-section" class="btn btn-secondary">
+                            <span>Launch Simulator</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 2 — WHAT IS BLOCKCHAIN? -->
+            <section id="section2" class="section-wrapper">
+                <h2 class="section-title">What is Blockchain?</h2>
+                <p class="section-subtitle">Understanding the core structure of a secure, distributed digital notebook that cannot be secretly edited by anyone.</p>
+                
+                <div class="cards-grid">
+                    <div class="glass-card cyan-glow-card">
+                        <h3>1. Digital Notebook</h3>
+                        <p>At its heart, a blockchain is simply an open, electronic ledger—a spreadsheet or database—that stores logs of transactions. It runs across a network of separate computers rather than one server.</p>
+                    </div>
+                    <div class="glass-card cyan-glow-card">
+                        <h3>2. Immutable Ledger</h3>
+                        <p>Once a record is written, it is sealed forever. Cryptographic hashes chain each block to the previous one. Editing previous blocks would break all downstream linkages, alerting the entire network.</p>
+                    </div>
+                    <div class="glass-card cyan-glow-card">
+                        <h3>3. Peer-to-Peer & Trustless</h3>
+                        <p>No intermediaries, banks, or clearing houses are needed. Network participants establish consensus using mathematically proven protocols, enabling secure, trustless commerce worldwide.</p>
+                    </div>
+                </div>
+
+                <!-- Block chain visual connector -->
+                <div class="glass-card">
+                    <h3>Visualizing Connected Blocks</h3>
+                    <p>Below is a dynamic chain representation. Notice how each block includes the cryptographic hash of the prior block, binding them sequentially.</p>
+                    
+                    <div class="block-chain-graphic-container" id="visual-blockchain-row">
+                        <!-- Block 1 (Genesis) -->
+                        <div class="visual-block-card">
+                            <h5>BLOCK #1 (Genesis)</h5>
+                            <div class="visual-block-fields">
+                                <div class="visual-block-field">
+                                    <span class="field-label">Prev Hash:</span>
+                                    <span class="field-value hash">00000000000</span>
+                                </div>
+                                <div class="visual-block-field">
+                                    <span class="field-label">Data:</span>
+                                    <span class="field-value">Genesis Block</span>
+                                </div>
+                                <div class="visual-block-field">
+                                    <span class="field-label">Nonce:</span>
+                                    <span class="field-value">10492</span>
+                                </div>
+                                <div class="visual-block-field">
+                                    <span class="field-label">Hash:</span>
+                                    <span class="field-value hash">0000fa2bc91...</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="blockchain-connector-arrow">➔</div>
+
+                        <!-- Block 2 -->
+                        <div class="visual-block-card">
+                            <h5>BLOCK #2</h5>
+                            <div class="visual-block-fields">
+                                <div class="visual-block-field">
+                                    <span class="field-label">Prev Hash:</span>
+                                    <span class="field-value hash">0000fa2bc91...</span>
+                                </div>
+                                <div class="visual-block-field">
+                                    <span class="field-label">Data:</span>
+                                    <span class="field-value">Alice -> Bob (1.2 BTC)</span>
+                                </div>
+                                <div class="visual-block-field">
+                                    <span class="field-label">Nonce:</span>
+                                    <span class="field-value">84920</span>
+                                </div>
+                                <div class="visual-block-field">
+                                    <span class="field-label">Hash:</span>
+                                    <span class="field-value hash">00007b8a1c9...</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="blockchain-connector-arrow">➔</div>
+
+                        <!-- Block 3 -->
+                        <div class="visual-block-card" id="visual-block-3">
+                            <h5>BLOCK #3</h5>
+                            <div class="visual-block-fields">
+                                <div class="visual-block-field">
+                                    <span class="field-label">Prev Hash:</span>
+                                    <span class="field-value hash">00007b8a1c9...</span>
+                                </div>
+                                <div class="visual-block-field">
+                                    <span class="field-label">Data:</span>
+                                    <span class="field-value">Charlie -> David (5.0 BTC)</span>
+                                </div>
+                                <div class="visual-block-field">
+                                    <span class="field-label">Nonce:</span>
+                                    <span class="field-value">47201</span>
+                                </div>
+                                <div class="visual-block-field">
+                                    <span class="field-label">Hash:</span>
+                                    <span class="field-value hash">00002f1a6c4...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="text-align: center;">
+                        <button class="btn btn-primary" id="btn-demo-add-block" style="font-size: 0.85rem; padding: 0.6rem 1.25rem;">
+                            <span>Simulate New Block Addition</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="analogy-box">
+                    <div class="analogy-title">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 14h-2v-4h2zm0-6h-2V8h2z"/></svg>
+                        <span>The Google Docs Analogy</span>
+                    </div>
+                    <p>Imagine sharing a Google Doc with 100 people. When someone makes an edit, everybody instantly sees the update on their own screen. The document is not kept on just one hard drive; it is shared and synchronized globally. If one person tries to secretly edit their local copy to lie about historical information, the remaining 99 screens will immediately flag the mismatch, rejecting the change.</p>
+                </div>
+            </section>
+
+            <!-- SECTION 3 — WEB1 vs WEB2 vs WEB3 -->
+            <section id="section3" class="section-wrapper">
+                <h2 class="section-title">Web1 vs Web2 vs Web3</h2>
+                <p class="section-subtitle">How the internet evolved from read-only static pages, to centralized social ecosystems, into user-owned cryptographic protocols.</p>
+
+                <div class="timeline-container">
+                    <div class="timeline-item web1">
+                        <span class="timeline-badge">1990 - 2004</span>
+                        <h3>Web1: The Read-Only Internet</h3>
+                        <p style="margin-bottom: 0.5rem;">The early web was an era of static HTML websites, online directories, and news feeds. Users were passive consumers of information.</p>
+                        <p style="font-size: 0.85rem; font-family: var(--font-mono); color: var(--neon-cyan);">Key features: Simple HTML/CSS, personal homepages, zero user interaction, no databases.</p>
+                    </div>
+                    
+                    <div class="timeline-item web2">
+                        <span class="timeline-badge">2004 - PRESENT</span>
+                        <h3>Web2: The Read & Write Internet</h3>
+                        <p style="margin-bottom: 0.5rem;">The age of social media networks, video content aggregators, and real-time interaction. Users could upload data, comment, share, and build digital portfolios.</p>
+                        <p style="font-size: 0.85rem; font-family: var(--font-mono); color: var(--neon-purple); margin-bottom: 0.75rem;">Key features: Interactive blogs, centralized servers, personalized databases (Facebook, YouTube, Google).</p>
+                        <div class="cons-box" style="padding: 1rem;">
+                            <h4 style="font-size: 0.9rem; margin-bottom: 0.35rem;">The Big Web2 Problem</h4>
+                            <p style="font-size: 0.82rem;">Centralized platforms fully control user identity, own generated data, monetize user information, and maintain absolute censorship authority.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item web3">
+                        <span class="timeline-badge">FUTURE / DECENTRALIZED</span>
+                        <h3>Web3: The Read, Write & Own Internet</h3>
+                        <p style="margin-bottom: 0.5rem;">A self-sovereign blockchain-backed ecosystem where users own their personal identity, digital assets, and transactions without relying on corporate giants.</p>
+                        <p style="font-size: 0.85rem; font-family: var(--font-mono); color: var(--neon-gold);">Key features: Decentralized Apps (DApps), Smart Contracts, Cryptography, Private Keys, Self-Sovereign Identity.</p>
+                    </div>
+                </div>
+
+                <!-- Comparison Table -->
+                <div class="comparison-table-wrapper">
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>Web1 (Read-Only)</th>
+                                <th>Web2 (Read + Write)</th>
+                                <th>Web3 (Read + Write + Own)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Core Concept</strong></td>
+                                <td>Information Sharing</td>
+                                <td>Centralized Communities</td>
+                                <td>Decentralized Ledgers</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Data Host</strong></td>
+                                <td>Static Server Files</td>
+                                <td>Corporate Cloud (AWS, Google)</td>
+                                <td>Peer-to-Peer Node Network</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Data Ownership</strong></td>
+                                <td>Content Creators</td>
+                                <td>Centralized Companies</td>
+                                <td>Self-Sovereign User Wallets</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Identity Protocol</strong></td>
+                                <td>Static email registrations</td>
+                                <td>Single Sign-On (Login with Google)</td>
+                                <td>Private Cryptographic Keys</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- SECTION 4 — CENTRALIZED vs DECENTRALIZED -->
+            <section id="section4" class="section-wrapper">
+                <h2 class="section-title">Centralized vs Decentralized Systems</h2>
+                <p class="section-subtitle">Comparing absolute corporate database servers against fault-tolerant, censor-proof decentralized node networks.</p>
+
+                <div class="centralized-visualizer-container">
+                    <!-- Centralized Visualizer -->
+                    <div class="network-simulation-box">
+                        <h3 style="margin-bottom: 0.5rem; font-size: 1.15rem;">Centralized Network</h3>
+                        <p style="font-size: 0.82rem; color: #64748b; margin-bottom: 1rem;">All requests flow through one server. Click to break the center server.</p>
+                        <canvas id="centralized-canvas" class="network-simulation-canvas"></canvas>
+                        <div class="network-simulation-controls">
+                            <button class="btn btn-secondary" id="btn-toggle-central" style="font-size: 0.75rem; padding: 0.4rem 1rem;">
+                                <span>Simulate Server Collapse</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Decentralized Visualizer -->
+                    <div class="network-simulation-box">
+                        <h3 style="margin-bottom: 0.5rem; font-size: 1.15rem;">Decentralized Network</h3>
+                        <p style="font-size: 0.82rem; color: #64748b; margin-bottom: 1rem;">Click nodes to knock them offline and see how peers route data around them.</p>
+                        <canvas id="decentralized-canvas" class="network-simulation-canvas"></canvas>
+                        <div class="network-simulation-controls">
+                            <button class="btn btn-secondary" id="btn-reset-decentral" style="font-size: 0.75rem; padding: 0.4rem 1rem;">
+                                <span>Recover All Nodes</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pros-cons-grid">
+                    <div class="pros-box">
+                        <h4>Centralized (Banks, Big Tech)</h4>
+                        <ul class="bullet-list">
+                            <li>Extremely fast response speeds (single database call)</li>
+                            <li>Straightforward updates and simple system management</li>
+                            <li><strong>Single Point of Failure:</strong> If the database crashes, the entire system dies</li>
+                            <li><strong>Censorship Vulnerability:</strong> The central host can block accounts or alter balances at will</li>
+                        </ul>
+                    </div>
+                    <div class="cons-box">
+                        <h4>Decentralized (Bitcoin, Ethereum)</h4>
+                        <ul class="bullet-list">
+                            <li><strong>Censorship Resistant:</strong> No single entity can lock or freeze transactions</li>
+                            <li><strong>Fault Tolerance:</strong> If 50% of the nodes go offline, the ledger keeps updating</li>
+                            <li>Coordination overhead makes transaction confirmation slower</li>
+                            <li>Higher storage overhead as every validator keeps a full history copy</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 5 — BITCOIN EXPLAINED -->
+            <section id="section5" class="section-wrapper">
+                <h2 class="section-title">Bitcoin Explained</h2>
+                <p class="section-subtitle">How Bitcoin solved the double-spending problem to introduce the world's first scarce, peer-to-peer digital money.</p>
+
+                <div class="glass-card">
+                    <div style="display: flex; gap: 2rem; align-items: center; flex-wrap: wrap;">
+                        <div style="flex: 1; min-width: 300px;">
+                            <h3>The Sovereign Ledger</h3>
+                            <p style="margin-bottom: 1.25rem;">Launched in 2009 by the anonymous developer **Satoshi Nakamoto**, Bitcoin is a public consensus system that tracking balances of the native digital currency, BTC.</p>
+                            <p style="margin-bottom: 1.25rem;">Unlike traditional cash, Bitcoin has a fixed max supply of exactly **21 Million coins**. It is entirely open-source, permissionless, and secured by cryptographic miners globally.</p>
+                            
+                            <div class="analogy-box" style="margin-top: 1rem;">
+                                <div class="analogy-title">
+                                    <span>Why is it secure?</span>
+                                </div>
+                                <p style="font-size: 0.88rem;">Every single transaction is publicly broadcasted. Rather than auditing a private bank database, anyone can verify the history of every Satoshi from the very first block mined.</p>
+                            </div>
+                        </div>
+                        
+                        <div style="flex: 1; min-width: 300px; background: rgba(0,0,0,0.3); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border-glass);">
+                            <h4 style="color: var(--neon-gold); font-family: var(--font-heading); margin-bottom: 0.75rem;">Bitcoin Transaction Steps</h4>
+                            <ol style="padding-left: 1.25rem; font-size: 0.9rem; color: #94a3b8; display: flex; flex-direction: column; gap: 0.5rem;">
+                                <li><strong>Sign:</strong> You sign a transaction with your wallet's Private Key.</li>
+                                <li><strong>Broadcast:</strong> The transaction is sent to the P2P node network.</li>
+                                <li><strong>Mempool:</strong> Nodes store the transaction in their temporary memory pools.</li>
+                                <li><strong>Mine:</strong> A miner groups the transaction into a block and solves a math puzzle.</li>
+                                <li><strong>Seal:</strong> The block is appended to the ledger, and balance changes are finalized.</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 6 — HOW A BLOCK IS CREATED -->
+            <section id="section6" class="section-wrapper">
+                <h2 class="section-title">How a Block is Created</h2>
+                <p class="section-subtitle">Walk through a live, interactive simulation showing how transactions travel from user wallets into sealed ledger blocks.</p>
+
+                <div class="simulator-layout">
+                    <!-- Left column: Mempool -->
+                    <div class="mempool-card">
+                        <div class="mempool-title">
+                            <h3>Active Mempool</h3>
+                            <span class="mempool-count" id="mempool-counter">5 TX Pending</span>
+                        </div>
+                        <p style="font-size: 0.82rem; color: #64748b; margin-bottom: 1rem;">These are transactions waiting to be validated and grouped into the next block.</p>
+                        
+                        <ul class="mempool-list" id="mempool-list-element">
+                            <!-- Populated dynamically via JS -->
+                        </ul>
+
+                        <!-- Tx creation button -->
+                        <div style="margin-top: 1.25rem; border-top: 1px solid var(--border-glass); padding-top: 1rem;">
+                            <button class="btn btn-secondary" id="btn-sim-send-tx" style="width: 100%; font-size: 0.85rem;">
+                                <span>Create Random Transaction</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Right column: Miner interface -->
+                    <div class="mining-panel" id="miner-container-panel">
+                        <div class="mining-pulse-overlay" id="mine-shimmer"></div>
+                        <h3 style="margin-bottom: 0.5rem; color: var(--neon-gold);">Block Explorer & Miner</h3>
+                        <p style="font-size: 0.82rem; color: #64748b; margin-bottom: 1.5rem;">Input custom block data, adjust difficulty target, and click "Mine Block" to solve the SHA-256 hash puzzle.</p>
+                        
+                        <div class="mining-block-form">
+                            <div class="form-row">
+                                <span class="form-label">Block Number:</span>
+                                <input type="text" id="mine-block-num" class="form-input" value="#4" disabled>
+                            </div>
+                            <div class="form-row">
+                                <span class="form-label">Previous Hash:</span>
+                                <input type="text" id="mine-prev-hash" class="form-input" value="00002f1a6c4b901aefbcde8740c2194f..." disabled>
+                            </div>
+                            <div class="form-row">
+                                <span class="form-label">Transactions:</span>
+                                <textarea id="mine-block-txs" class="form-input" style="height: 60px; font-family: var(--font-mono); resize: none;" disabled>Empty</textarea>
+                            </div>
+                            <div class="form-row">
+                                <span class="form-label">Difficulty:</span>
+                                <select id="mine-difficulty" class="form-input">
+                                    <option value="1">1 Zero (Very Easy)</option>
+                                    <option value="2">2 Zeros (Easy)</option>
+                                    <option value="3" selected>3 Zeros (Medium)</option>
+                                    <option value="4">4 Zeros (Hard)</option>
+                                </select>
+                            </div>
+                            <div class="form-row">
+                                <span class="form-label">Nonce:</span>
+                                <input type="text" id="mine-nonce" class="form-input" value="0" disabled>
+                            </div>
+                            
+                            <div class="hash-display-area">
+                                <div class="hash-label">Current SHA-256 Hash</div>
+                                <div class="hash-value" id="mine-hash-val">Press Mine to Solve...</div>
+                            </div>
+                            
+                            <button class="btn btn-mine" id="btn-trigger-mining">
+                                <span>Try Mining Block</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 7 — PROOF OF WORK (PoW) -->
+            <section id="section7" class="section-wrapper">
+                <h2 class="section-title">Proof of Work (PoW)</h2>
+                <p class="section-subtitle">Understanding the cryptography and hardware puzzles that secure decentralized ledgers like Bitcoin.</p>
+
+                <div class="cards-grid">
+                    <div class="glass-card gold-glow-card">
+                        <h3>SHA-256 Hash Puzzle</h3>
+                        <p>PoW relies on finding a hash with a specific number of leading zeros. Because hashes are completely random, miners can only guess the puzzle solution by trying billions of numbers ("nonces") per second.</p>
+                    </div>
+                    <div class="glass-card gold-glow-card">
+                        <h3>Block Rewards</h3>
+                        <p>Miners spend electricity to secure the chain. The first miner to find a valid nonce wins the block reward (newly minted BTC) plus transaction fees, keeping miners economically aligned.</p>
+                    </div>
+                    <div class="glass-card gold-glow-card">
+                        <h3>The Difficulty Loop</h3>
+                        <p>As more miners join, blocks would be solved too quickly. The system automatically adjusts puzzle difficulty every 2,016 blocks to guarantee a constant ~10-minute block generation time.</p>
+                    </div>
+                </div>
+
+                <div class="cons-box" style="margin-top: 1.5rem;">
+                    <h4 style="margin-bottom: 0.5rem;">Disadvantages of Proof of Work</h4>
+                    <ul class="bullet-list">
+                        <li><strong>High Electricity Cost:</strong> Global Bitcoin miners consume more annual power than entire small countries.</li>
+                        <li><strong>Slow Scalability:</strong> Bitcoin transactions are limited to roughly 7 transactions per second, leading to congestion during high traffic.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- SECTION 8 — ETHEREUM -->
+            <section id="section8" class="section-wrapper">
+                <h2 class="section-title">Ethereum & Smart Contracts</h2>
+                <p class="section-subtitle">How Ethereum transformed simple transaction networks into a global, Turing-complete decentralized computer.</p>
+
+                <div class="glass-card">
+                    <div style="display: flex; gap: 2.5rem; align-items: start; flex-wrap: wrap;">
+                        <div style="flex: 1; min-width: 300px;">
+                            <h3>The Ethereum Virtual Machine (EVM)</h3>
+                            <p style="margin-bottom: 1rem;">While Bitcoin is a digital calculator recording transactions, **Ethereum** is a programmable software platform. It runs the EVM, allowing developers to deploy self-executing software programs called **Smart Contracts**.</p>
+                            <p style="margin-bottom: 1rem;">Once a smart contract is compiled and published to the EVM, it acts as an unchangeable agent. It executes transaction rules exactly as written, with zero possibility of developer censorship or fraud.</p>
+                            
+                            <div class="mempool-card" style="margin-top: 1.5rem; background: rgba(0,0,0,0.2);">
+                                <h4 style="color: var(--neon-purple); font-size: 0.95rem; margin-bottom: 0.5rem;">The Ethereum Gas Ecosystem</h4>
+                                <p style="font-size: 0.85rem; margin-bottom: 0.75rem;">Every contract code step takes computer energy. Users pay for this computation in **Gas** (denominated in Gwei, or billionths of an ETH). This fee keeps miners rewarded and prevents spam.</p>
+                                <div class="form-row" style="font-size: 0.8rem;">
+                                    <span class="field-label">Transfer ETH:</span>
+                                    <span class="field-value" style="color: var(--neon-green)">21,000 Gas</span>
+                                </div>
+                                <div class="form-row" style="font-size: 0.8rem;">
+                                    <span class="field-label">Interact Contract:</span>
+                                    <span class="field-value" style="color: var(--neon-gold)">60,000+ Gas</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="flex: 1.2; min-width: 300px; display: flex; flex-direction: column; gap: 1.25rem;">
+                            <h3>The Ethereum Web3 Ecosystem</h3>
+                            <div class="cards-grid" style="grid-template-columns: 1fr; gap: 1rem; margin-bottom: 0;">
+                                <div class="glass-card" style="padding: 1.25rem;">
+                                    <h4 style="color: var(--neon-cyan); margin-bottom: 0.25rem;">DeFi (Decentralized Finance)</h4>
+                                    <p style="font-size: 0.85rem;">Algorithmic loan desks, lending protocols, and exchanges that eliminate banks. (Examples: Uniswap, Aave)</p>
+                                </div>
+                                <div class="glass-card" style="padding: 1.25rem;">
+                                    <h4 style="color: var(--neon-purple); margin-bottom: 0.25rem;">NFTs (Non-Fungible Tokens)</h4>
+                                    <p style="font-size: 0.85rem;">Cryptographic proof of ownership for digital art, assets, and collectibles. (ERC-721 standard)</p>
+                                </div>
+                                <div class="glass-card" style="padding: 1.25rem;">
+                                    <h4 style="color: var(--neon-gold); margin-bottom: 0.25rem;">DAOs (Decentralized Autonomous Orgs)</h4>
+                                    <p style="font-size: 0.85rem;">Organizations run by smart contract code, with rules voted on by token holder boards.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 9 — PROOF OF STAKE (PoS) -->
+            <section id="section9" class="section-wrapper">
+                <h2 class="section-title">Proof of Stake (PoS)</h2>
+                <p class="section-subtitle">How modern block validation replaces hardware mining loops with capital staking, cutting energy costs by 99%.</p>
+
+                <div class="glass-card">
+                    <h3>Validator Selection Roulette</h3>
+                    <p style="margin-bottom: 1.5rem;">In a PoS system, validators lock up ("stake") coins to participate in consensus. The system chooses validators based on the amount of capital staked. Click **Select Next Validator** to see how the system picks validators based on stake weights.</p>
+                    
+                    <div class="pos-visualization-layout">
+                        <!-- Wheel area -->
+                        <div class="stake-wheel-panel">
+                            <div class="stake-wheel-indicator"></div>
+                            <canvas id="stake-wheel" class="stake-wheel-canvas"></canvas>
+                            <button class="btn btn-primary" id="btn-spin-validators" style="margin-top: 1.5rem; font-size: 0.85rem; padding: 0.6rem 1.25rem;">
+                                <span>Select Next Validator</span>
+                            </button>
+                        </div>
+                        
+                        <!-- List area -->
+                        <div class="validators-list-panel" id="validators-list-container">
+                            <!-- Populated dynamically via JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pros-cons-grid" style="margin-top: 1.5rem;">
+                    <div class="pros-box">
+                        <h4>PoS Advantages</h4>
+                        <ul class="bullet-list">
+                            <li><strong>99.9% Energy Efficiency:</strong> No computer puzzles. Validating runs on light node servers.</li>
+                            <li><strong>Higher Throughput:</strong> Blocks can be coordinated much faster than under PoW.</li>
+                            <li><strong>Validator Slashing:</strong> Malicious validators lose their staked coins immediately.</li>
+                        </ul>
+                    </div>
+                    <div class="cons-box">
+                        <h4>PoS Comparison vs PoW</h4>
+                        <ul class="bullet-list">
+                            <li>Validators do not require specialized hardware (ASICs).</li>
+                            <li>Rich-get-richer risk since higher stake pools win block selection more often.</li>
+                            <li>Historically younger consensus mechanism with fewer years of validation history.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 10 — PUBLIC, PRIVATE & HYBRID BLOCKCHAINS -->
+            <section id="section10" class="section-wrapper">
+                <h2 class="section-title">Public, Private & Hybrid Blockchains</h2>
+                <p class="section-subtitle">Choosing the right architectural blueprint depending on required transparency, speed, and privacy levels.</p>
+
+                <div class="cards-grid">
+                    <div class="glass-card cyan-glow-card">
+                        <span class="timeline-badge" style="background: rgba(0, 242, 254, 0.1); color: var(--neon-cyan); margin-bottom: 0.75rem;">PUBLIC</span>
+                        <h3>Permissionless Networks</h3>
+                        <p style="margin-bottom: 0.75rem;">Open for anybody globally to read ledger logs, deploy contracts, or run node software.</p>
+                        <p style="font-size: 0.82rem; font-family: var(--font-mono); color: #64748b;">Examples: Bitcoin, Ethereum, Solana</p>
+                    </div>
+                    <div class="glass-card purple-glow-card">
+                        <span class="timeline-badge" style="background: rgba(168, 85, 247, 0.1); color: var(--neon-purple); margin-bottom: 0.75rem;">PRIVATE</span>
+                        <h3>Permissioned Consortia</h3>
+                        <p style="margin-bottom: 0.75rem;">Access control managed by a central board. High speed and private, for enterprises.</p>
+                        <p style="font-size: 0.82rem; font-family: var(--font-mono); color: #64748b;">Examples: Hyperledger Fabric, Corda</p>
+                    </div>
+                    <div class="glass-card gold-glow-card">
+                        <span class="timeline-badge" style="background: rgba(251, 191, 36, 0.1); color: var(--neon-gold); margin-bottom: 0.75rem;">HYBRID</span>
+                        <h3>Selective Permission</h3>
+                        <p style="margin-bottom: 0.75rem;">Combines private transaction states with public cryptographic block proofs.</p>
+                        <p style="font-size: 0.82rem; font-family: var(--font-mono); color: #64748b;">Examples: IBM Food Trust, Dragonchain</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 11 — BLOCKCHAIN LOGS & TRANSACTION DATA -->
+            <section id="section11" class="section-wrapper">
+                <h2 class="section-title">Blockchain Logs & Transaction Data</h2>
+                <p class="section-subtitle">Inside a real ledger block explorer. Examine the essential data fields packaged inside every ledger transaction log.</p>
+
+                <div class="glass-card">
+                    <h3>Block Explorer Interface</h3>
+                    <p style="margin-bottom: 1.5rem;">Below is the anatomy of a live ledger transaction log. Hover or click on the highlighted fields to learn about their cryptographic importance.</p>
+                    
+                    <div class="mempool-card" style="background: #020306; border: 1px solid var(--border-glass); padding: 1.5rem; font-family: var(--font-mono); font-size: 0.85rem;">
+                        <div style="border-bottom: 1px solid var(--border-glass); padding-bottom: 0.75rem; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-weight: 700; color: #ffffff;">Transaction Detail Log</span>
+                            <span class="mempool-count" style="background: rgba(16, 185, 129, 0.15); color: var(--neon-green); border: 1px solid rgba(16, 185, 129, 0.3); box-shadow: none;">Success</span>
+                        </div>
+                        
+                        <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                            <div class="form-row">
+                                <span class="field-label" style="width: 140px;">Tx Hash:</span>
+                                <span class="field-value" style="color: var(--neon-cyan); cursor: help;" title="Unique cryptographic identifier generated by hashing the transaction data.">0x9a4f210b38c23d49f03221e740c2194fe9b0b471c210b7f83a48e718696c21e7</span>
+                            </div>
+                            <div class="form-row">
+                                <span class="field-label" style="width: 140px;">Block:</span>
+                                <span class="field-value" style="color: var(--neon-purple); cursor: help;" title="The index number of the block where this transaction is permanently sealed.">#17,492,042</span>
+                            </div>
+                            <div class="form-row">
+                                <span class="field-label" style="width: 140px;">Timestamp:</span>
+                                <span class="field-value" style="cursor: help;" id="explorer-timestamp" title="The exact date and time the miner committed this transaction to the ledger.">Loading...</span>
+                            </div>
+                            <div class="form-row">
+                                <span class="field-label" style="width: 140px;">From:</span>
+                                <span class="field-value" style="color: #ffffff; cursor: help;" title="The public address of the sender's EOA wallet.">0x4facfe1d09e3bc8917d84a71b2f0a1c3df4032a9</span>
+                            </div>
+                            <div class="form-row">
+                                <span class="field-label" style="width: 140px;">To:</span>
+                                <span class="field-value" style="color: #ffffff; cursor: help;" title="The public address of the recipient's wallet or contract address.">0x3c3c3d0b21a8c3d3f90ab94c718a2c3df40f1a92</span>
+                            </div>
+                            <div class="form-row">
+                                <span class="field-label" style="width: 140px;">Value:</span>
+                                <span class="field-value" style="color: var(--neon-gold); font-weight: bold; cursor: help;" title="The native coin amount transferred (in ETH or BTC).">2.50 ETH ($9,613.00)</span>
+                            </div>
+                            <div class="form-row">
+                                <span class="field-label" style="width: 140px;">Gas Price:</span>
+                                <span class="field-value" style="cursor: help;" title="The cost paid per gas unit used.">18 Gwei ($0.000000018 ETH)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 12 — UTXO MODEL -->
+            <section id="section12" class="section-wrapper">
+                <h2 class="section-title">The UTXO Ledger Model</h2>
+                <p class="section-subtitle">How Bitcoin operates like physical cash, using unspent transaction outputs to build transactions.</p>
+
+                <div class="glass-card">
+                    <h3>Unspent Transaction Outputs (UTXO)</h3>
+                    <p style="margin-bottom: 1.25rem;">Unlike a bank account, Bitcoin does not store a balance sheet. Instead, your balance is simply the sum of all your **Unspent Transaction Outputs (UTXOs)**.</p>
+                    <p style="margin-bottom: 1.5rem;">To send Bitcoin, you must select existing UTXOs in your wallet as **Inputs**. You then create new **Outputs** (coins sent to the receiver), plus a **Change Output** sent back to yourself if your inputs exceed your target amount.</p>
+                    
+                    <div class="utxo-visualizer">
+                        <!-- Left controls: select coins -->
+                        <div class="utxo-inputs-outputs-container">
+                            <div class="utxo-pool-box">
+                                <h4 style="color: var(--neon-gold);">Your UTXO Wallet Pool</h4>
+                                <p style="font-size: 0.8rem; color: #64748b; margin-top: 0.25rem;">Select which UTXO coins you want to spend as transaction inputs.</p>
+                                <div class="utxo-coin-grid" id="utxo-coin-container">
+                                    <!-- Populated dynamically via JS -->
+                                </div>
+                            </div>
+                            
+                            <div class="utxo-creator-form">
+                                <div class="form-row">
+                                    <span class="form-label" style="font-size: 0.85rem;">Send to Bob:</span>
+                                    <input type="number" id="utxo-send-amount" class="form-input" value="3.5" step="0.1" min="0.1" style="font-size: 0.85rem; padding: 0.4rem 0.75rem;">
+                                </div>
+                                <div class="utxo-summary-box">
+                                    <div class="utxo-summary-row">
+                                        <span class="utxo-summary-label">Selected Inputs:</span>
+                                        <span class="utxo-summary-value" id="utxo-sum-inputs">0.0 BTC</span>
+                                    </div>
+                                    <div class="utxo-summary-row">
+                                        <span class="utxo-summary-label">Bob's Output:</span>
+                                        <span class="utxo-summary-value" id="utxo-sum-send">3.5 BTC</span>
+                                    </div>
+                                    <div class="utxo-summary-row">
+                                        <span class="utxo-summary-label">Your Change:</span>
+                                        <span class="utxo-summary-value highlight" id="utxo-sum-change">0.0 BTC</span>
+                                    </div>
+                                </div>
+                                <button class="btn btn-mine" id="btn-trigger-utxo-tx" style="font-size: 0.85rem; padding: 0.6rem 1.25rem;">
+                                    <span>Execute UTXO Transaction</span>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Right panel: dynamic drawing -->
+                        <div class="utxo-visual-flow-diagram">
+                            <h4 style="margin-bottom: 0.5rem;">Visual Transaction Ledger</h4>
+                            <canvas id="utxo-diagram-canvas" class="utxo-diagram-canvas"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 13 — ACCOUNT-BASED MODEL -->
+            <section id="section13" class="section-wrapper">
+                <h2 class="section-title">The Account-Based Model</h2>
+                <p class="section-subtitle">How Ethereum records contract execution state directly in user balances, and what logs to look out for.</p>
+
+                <div class="glass-card">
+                    <h3>Accounts & State Balances</h3>
+                    <p style="margin-bottom: 1.25rem;">While Bitcoin handles UTXOs, **Ethereum** functions like a traditional bank account ledger. User accounts store balances directly. Transactions deduct funds from the sender's account and add them to the receiver's account.</p>
+                    
+                    <div class="account-model-layout">
+                        <!-- Account list -->
+                        <div class="eth-accounts-state-box">
+                            <h4 style="color: var(--neon-purple); margin-bottom: 0.25rem;">Ethereum Account Registry</h4>
+                            <p style="font-size: 0.8rem; color: #64748b;">Select an Externally Owned Account (EOA) to initiate a transaction.</p>
+                            
+                            <div class="account-card-row" id="eth-accounts-list">
+                                <!-- Populated dynamically via JS -->
+                            </div>
+                        </div>
+                        
+                        <!-- Console and logs trigger -->
+                        <div class="account-actions-terminal">
+                            <h4 style="color: #ffffff; margin-bottom: 1rem;">Execute Account Transfer</h4>
+                            <div class="mining-block-form">
+                                <div class="form-row">
+                                    <span class="form-label" style="font-size: 0.85rem;">Send to contract:</span>
+                                    <input type="text" class="form-input" value="0x8c8c8c... (SimpleWallet)" disabled style="font-size: 0.85rem; padding: 0.4rem 0.75rem;">
+                                </div>
+                                <div class="form-row">
+                                    <span class="form-label" style="font-size: 0.85rem;">Value (ETH):</span>
+                                    <input type="number" id="eth-send-value" class="form-input" value="1.0" step="0.5" min="0.5" style="font-size: 0.85rem; padding: 0.4rem 0.75rem;">
+                                </div>
+                                <div class="form-row">
+                                    <span class="form-label" style="font-size: 0.85rem;">Gas Limit:</span>
+                                    <input type="number" id="eth-gas-limit" class="form-input" value="21000" disabled style="font-size: 0.85rem; padding: 0.4rem 0.75rem;">
+                                </div>
+                                <button class="btn btn-primary" id="btn-trigger-account-tx" style="font-size: 0.85rem; padding: 0.6rem 1.25rem; background: linear-gradient(135deg, var(--neon-purple) 0%, #4facfe 100%); box-shadow: 0 4px 15px rgba(168, 85, 247, 0.2);">
+                                    <span>Execute Transfer</span>
+                                </button>
+                            </div>
+
+                            <!-- Live logs console explorer -->
+                            <div class="account-explorer-logs-display" id="eth-event-logs-console">
+                                <div class="explorer-log-item">
+                                    <div class="log-tx-header">
+                                        <span>SYSTEM INITIATED</span>
+                                        <span>Idle</span>
+                                    </div>
+                                    <div class="log-tx-body">
+                                        <span>Select EOA and click execute to trigger event logs...</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- UTXO vs Account side-by-side -->
+                <div class="comparison-table-wrapper" style="margin-top: 2rem;">
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Comparison Aspect</th>
+                                <th>UTXO Model (Bitcoin)</th>
+                                <th>Account-Based Model (Ethereum)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Balance Storage</strong></td>
+                                <td>Sum of unspent change fragments</td>
+                                <td>Single dynamic ledger account database entry</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Privacy</strong></td>
+                                <td>High (easy to rotate change addresses)</td>
+                                <td>Low (all transactions tied to one account key)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Smart Contracts</strong></td>
+                                <td>Very restricted scripting language</td>
+                                <td>Highly flexible (EVM smart contracts)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Transaction Size</strong></td>
+                                <td>Variable (depends on number of inputs selected)</td>
+                                <td>Fixed and highly predictable</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- SECTION 14 — STABLECOINS -->
+            <section id="section14" class="section-wrapper">
+                <h2 class="section-title">What are Stablecoins?</h2>
+                <p class="section-subtitle">Solving volatility: how fiat-backed, crypto-collateralized, and algorithmic mechanics bind tokens to standard values.</p>
+
+                <div class="cards-grid">
+                    <div class="glass-card cyan-glow-card">
+                        <h3>1. Fiat-Backed</h3>
+                        <p style="margin-bottom: 0.75rem;">1:1 backed by real money in traditional bank vaults. Highly stable, but relies on a centralized issuer.</p>
+                        <p style="font-size: 0.82rem; font-family: var(--font-mono); color: #64748b;">Examples: USDT (Tether), USDC (Circle)</p>
+                    </div>
+                    <div class="glass-card purple-glow-card">
+                        <h3>2. Crypto-Backed</h3>
+                        <p style="margin-bottom: 0.75rem;">Secured by over-collateralizing other coins (e.g. locking $1.50 in ETH to mint $1.00 of stablecoin).</p>
+                        <p style="font-size: 0.82rem; font-family: var(--font-mono); color: #64748b;">Examples: DAI (MakerDAO)</p>
+                    </div>
+                    <div class="glass-card gold-glow-card">
+                        <h3>3. Algorithmic</h3>
+                        <p style="margin-bottom: 0.75rem;">Uses supply algorithms and arbitrage markets to dynamically balance pricing without hard assets.</p>
+                        <p style="font-size: 0.82rem; font-family: var(--font-mono); color: #64748b;">Examples: FRAX, UST (Legacy)</p>
+                    </div>
+                </div>
+
+                <div class="glass-card" style="margin-top: 1.5rem;">
+                    <h3>Stablecoins Market Cap Analysis</h3>
+                    <p style="margin-bottom: 1rem;">Stablecoins are the absolute economic foundation of decentralized finance, handling over **$150 Billion in total value** and billions in daily trading volume.</p>
+                    
+                    <div class="analogy-box" style="background: rgba(0,0,0,0.25); border-left-color: var(--neon-cyan);">
+                        <h4 style="color: var(--neon-cyan); margin-bottom: 0.5rem;">Why do stablecoins exist?</h4>
+                        <p style="font-size: 0.9rem;">Cryptocurrencies like Bitcoin and Ethereum fluctuate in value. To buy groceries or take out a loan, users require a stable medium of exchange that maintains a reliable peg to fiat currencies (like the US Dollar).</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 15 — STABLECOIN LOGS & TRANSACTIONS -->
+            <section id="section15" class="section-wrapper">
+                <h2 class="section-title">Stablecoin Logs & Transactions</h2>
+                <p class="section-subtitle">Decoding real smart contract event topics. Translate raw blockchain hexadecimal bytes into readable ERC-20 Transfer logs.</p>
+
+                <div class="stablecoin-interactive-grid">
+                    <!-- Stablecoin Mint & Burn Dashboard -->
+                    <div class="stablecoin-dashboard">
+                        <h4 style="color: var(--neon-cyan);">Simulated Stablecoin Contract</h4>
+                        <p style="font-size: 0.82rem; color: #64748b;">Use collateral to mint stablecoins or burn stablecoins to retrieve collateral.</p>
+                        
+                        <div class="dashboard-stats-grid">
+                            <div class="stat-metric-card">
+                                <span class="stat-label">Collateral Locked</span>
+                                <div class="stat-val" id="stable-collateral-val">$150.00</div>
+                            </div>
+                            <div class="stat-metric-card">
+                                <span class="stat-label">Stablecoin Supply</span>
+                                <div class="stat-val" id="stable-minted-val">100.00 DSC</div>
+                            </div>
+                        </div>
+
+                        <div class="collateral-slider-group">
+                            <div style="display: flex; justify-content: space-between; font-size: 0.8rem; font-family: var(--font-mono);">
+                                <span>Mint Target:</span>
+                                <span id="mint-amt-display" class="ticker-green">50.00 DSC</span>
+                            </div>
+                            <input type="range" id="stable-mint-range" class="collateral-slider" min="10" max="200" value="50">
+                        </div>
+
+                        <div style="display: flex; gap: 1rem;">
+                            <button class="btn btn-primary" id="btn-stable-mint" style="flex: 1; font-size: 0.85rem; padding: 0.5rem 1rem;">Mint DSC</button>
+                            <button class="btn btn-secondary" id="btn-stable-burn" style="flex: 1; font-size: 0.85rem; padding: 0.5rem 1rem;">Burn DSC</button>
+                        </div>
+                    </div>
+
+                    <!-- Log Decoder Box -->
+                    <div class="stablecoin-decoder-panel">
+                        <h4 style="color: var(--neon-purple); margin-bottom: 0.5rem;">ERC-20 Event Log Decoder</h4>
+                        <p style="font-size: 0.82rem; color: #64748b; margin-bottom: 1rem;">Smart contracts record events as raw hex logs. Click "Decode Event Log" to translate it into readable code.</p>
+                        
+                        <div class="hex-topics-display">
+                            <div class="hex-line topic-active" id="hex-topic-0" title="Topic 0 (Event signature hash for Transfer)"><strong>Topic 0 (Signature):</strong> 0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef</div>
+                            <div class="hex-line" id="hex-topic-1"><strong>Topic 1 (From Address):</strong> 0x0000000000000000000000004facfe1d09e3bc8917d84a71b2f0a1c3df4032a9</div>
+                            <div class="hex-line" id="hex-topic-2"><strong>Topic 2 (To Address):</strong> 0x0000000000000000000000003c3c3d0b21a8c3d3f90ab94c718a2c3df40f1a92</div>
+                            <div class="hex-line" id="hex-topic-data"><strong>Data (Value Hex):</strong> 0x0000000000000000000000000000000000000000000000000d8d726b7177a000</div>
+                        </div>
+
+                        <button class="btn btn-primary" id="btn-decode-log" style="width: 100%; font-size: 0.85rem; padding: 0.6rem 1.25rem; background: linear-gradient(135deg, var(--neon-purple) 0%, #b92b27 100%); border: none;">
+                            <span>Decode Event Log</span>
+                        </button>
+
+                        <div class="decoded-logs-display" id="decoded-log-output" style="margin-top: 1rem;">
+                            <!-- Decoded output target -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 16 — FINAL COMPARISON & SUMMARY -->
+            <section id="section16" class="section-wrapper">
+                <h2 class="section-title">Final Comparison & Summary</h2>
+                <p class="section-subtitle">A simple, structured cheat sheet summarizing key blockchain terms for final study and quick revision.</p>
+
+                <div class="cards-grid">
+                    <div class="glass-card cyan-glow-card">
+                        <h4 style="color: var(--neon-cyan); margin-bottom: 0.5rem;">Bitcoin vs Ethereum</h4>
+                        <p style="font-size: 0.88rem; color: #94a3b8;">Bitcoin is a scarce, sovereign transaction calculator (PoW, fixed 21M supply). Ethereum is a programmable software machine that executes smart contracts (PoS, EVM, gas ecosystem).</p>
+                    </div>
+                    <div class="glass-card purple-glow-card">
+                        <h4 style="color: var(--neon-purple); margin-bottom: 0.5rem;">PoW vs PoS</h4>
+                        <p style="font-size: 0.88rem; color: #94a3b8;">Proof of Work uses electricity and hardware hash puzzles to validate blocks. Proof of Stake uses staked capital and select validators, cutting power use by 99%.</p>
+                    </div>
+                    <div class="glass-card gold-glow-card">
+                        <h4 style="color: var(--neon-gold); margin-bottom: 0.5rem;">UTXO vs Account Model</h4>
+                        <p style="font-size: 0.88rem; color: #94a3b8;">UTXO (Bitcoin) acts like cash change outputs. Account model (Ethereum) manages a central balance registry, similar to bank statements.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 20 — OPTIONAL ADVANCED FEATURES HUB -->
+            <section id="advanced-feature-section" class="section-wrapper" style="padding-top: 3rem; border-top: 1px solid var(--border-glass);">
+                <h2 class="section-title">Web3 Interactive Sandbox</h2>
+                <p class="section-subtitle">Access the Smart Contract mock compiler, test your blockchain skills with the modular quiz, and search the custom glossary.</p>
+
+                <div class="advanced-features-tab-container">
+                    <!-- Nav Tabs -->
+                    <div class="advanced-tabs-nav">
+                        <button class="tab-btn active" onclick="switchTab('tab-ide')">1. Smart Contract IDE</button>
+                        <button class="tab-btn" onclick="switchTab('tab-quiz')">2. Knowledge Check & Quiz</button>
+                        <button class="tab-btn" onclick="switchTab('tab-glossary')">3. Interactive Glossary</button>
+                    </div>
+
+                    <!-- 1. MOCK IDE PANE -->
+                    <div class="tab-pane active" id="tab-ide">
+                        <div class="ide-wrapper">
+                            <!-- Code Editor -->
+                            <div class="ide-editor-panel">
+                                <div class="ide-editor-header">
+                                    <span style="font-family: var(--font-heading); font-weight: 600; font-size: 0.9rem; color: #64748b;">SimpleToken.sol</span>
+                                    <select id="ide-template-selector" class="form-input" style="width: 180px; font-size: 0.75rem; padding: 0.25rem 0.5rem;">
+                                        <option value="simple-token">SimpleToken (ERC-20)</option>
+                                        <option value="simple-voting">SimpleVoting (DAO)</option>
+                                    </select>
+                                </div>
+                                <textarea class="solidity-codearea" id="solidity-textarea" spellcheck="false" readonly>
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract SimpleToken {
+    string public name = "SimpleToken";
+    mapping(address => uint256) public balances;
+
+    constructor() {
+        balances[msg.sender] = 1000;
+    }
+
+    function transfer(address to, uint256 amount) public returns (bool) {
+        require(balances[msg.sender] >= amount, "Insufficient balance");
+        balances[msg.sender] -= amount;
+        balances[to] += amount;
+        return true;
+    }
+}
+                                </textarea>
+                            </div>
+
+                            <!-- Controls and execution panel -->
+                            <div class="ide-interaction-panel">
+                                <div class="ide-deploy-card">
+                                    <h4 style="margin-bottom: 0.5rem;">Deploy & Interact</h4>
+                                    <p style="font-size: 0.8rem; color: #64748b; margin-bottom: 1rem;">Click deploy to compile SimpleToken to the simulated EVM.</p>
+                                    
+                                    <button class="btn btn-primary" id="btn-ide-deploy" style="width: 100%; font-size: 0.85rem; padding: 0.5rem 1rem;">
+                                        <span>Deploy Contract</span>
+                                    </button>
+
+                                    <!-- Action inputs after deploy -->
+                                    <div class="contract-functions-group" id="ide-functions-container" style="display: none;">
+                                        <div class="contract-btn-row">
+                                            <button class="btn btn-secondary" id="btn-ide-call-balance" style="font-size: 0.75rem; padding: 0.4rem 1rem; width: 120px;">balances()</button>
+                                            <input type="text" class="form-input" value="0x4facfe... (Deployer)" disabled style="font-size: 0.75rem; padding: 0.35rem 0.5rem;">
+                                        </div>
+                                        <div class="contract-btn-row">
+                                            <button class="btn btn-primary" id="btn-ide-call-transfer" style="font-size: 0.75rem; padding: 0.4rem 1rem; width: 120px; background: linear-gradient(135deg, var(--neon-purple) 0%, #1565c0 100%);">transfer()</button>
+                                            <input type="text" id="ide-input-to" class="form-input" placeholder="Recipient address" style="font-size: 0.75rem; padding: 0.35rem 0.5rem;" value="0x3c3c3d0b21a8c3d3f90ab94c718a2c3df40f1a92">
+                                            <input type="number" id="ide-input-amt" class="form-input" placeholder="Amount" style="font-size: 0.75rem; padding: 0.35rem 0.5rem; width: 80px;" value="100">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="ide-console-log" id="ide-console">
+                                    [SYSTEM] Ready to deploy to EVM...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. MODULAR QUIZ PANE -->
+                    <div class="tab-pane" id="tab-quiz">
+                        <div class="quiz-wrapper" id="quiz-intro-box">
+                            <div class="quiz-card" style="text-align: center;">
+                                <h3 style="margin-bottom: 0.75rem; font-size: 1.5rem;">Take the Web3 Challenge</h3>
+                                <p style="color: #94a3b8; margin-bottom: 2rem;">Test your knowledge on Bitcoin, Ethereum, ledgers, UTXOs, and Consensus. Score 8/10 or higher to earn a dynamic, downloadable cryptographic completion certificate!</p>
+                                <button class="btn btn-primary" onclick="startQuiz()">
+                                    <span>Start Quiz</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Quiz question window -->
+                        <div class="quiz-wrapper" id="quiz-question-box" style="display: none;">
+                            <div class="quiz-card">
+                                <div class="quiz-progress-bar-container">
+                                    <div class="quiz-progress-fill" id="quiz-bar-fill"></div>
+                                </div>
+                                <div class="quiz-question-counter" id="quiz-counter">QUESTION 1 OF 10</div>
+                                <div class="quiz-question-text" id="quiz-question-target">Question copy goes here?</div>
+                                
+                                <div class="quiz-options-group" id="quiz-options-container">
+                                    <!-- Options populated dynamically -->
+                                </div>
+                                
+                                <div class="quiz-footer">
+                                    <span style="font-size: 0.8rem; color: #64748b;" id="quiz-score-indicator">Score: 0/10</span>
+                                    <button class="btn btn-secondary" id="btn-next-question" style="font-size: 0.8rem; padding: 0.5rem 1.25rem;" disabled>Next Question</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quiz Certificate output window -->
+                        <div class="quiz-wrapper" id="quiz-certificate-box" style="display: none;">
+                            <div class="certificate-display-card" id="cert-wrapper-card">
+                                <h3 style="color: var(--neon-green); font-size: 1.5rem; margin-bottom: 0.5rem;">Congratulations! You Passed!</h3>
+                                <p style="font-size: 0.95rem; color: #94a3b8;">You scored <span id="cert-final-score" style="font-weight: bold; color: #ffffff;">9/10</span>. Type your name below to print your course graduation certificate.</p>
+                                
+                                <div class="cert-input-row">
+                                    <input type="text" id="cert-user-name" class="form-input" placeholder="Enter your full name" style="flex: 1;">
+                                    <button class="btn btn-primary" id="btn-generate-cert-png" style="font-size: 0.85rem; padding: 0.5rem 1rem;">Generate Certificate</button>
+                                </div>
+                                
+                                <div class="cert-canvas-container" id="canvas-wrapper-box" style="display: none;">
+                                    <canvas id="certificate-canvas" class="certificate-render-canvas" width="800" height="550"></canvas>
+                                    <button class="btn btn-secondary" id="btn-download-cert" style="font-size: 0.8rem; padding: 0.5rem 1rem; margin-top: 1rem; width: 100%;">Download JPG</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. GLOSSARY PANE -->
+                    <div class="tab-pane" id="tab-glossary">
+                        <div class="glossary-search-wrapper">
+                            <input type="text" id="glossary-search" class="glossary-search-bar" placeholder="Search terms (e.g. hash, mempool, validator)...">
+                            
+                            <div class="glossary-cards-container" id="glossary-container">
+                                <!-- Populated dynamically via JS -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="simulator.js"></script>
+    <script src="utxo-account.js"></script>
+    <script src="quiz.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
